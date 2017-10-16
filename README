@@ -1,1 +1,8 @@
 This is my vim config.
+
+Simple Installation
+git init
+git remote add origin https://github.com/weikiat87/vimconfig.git
+git fetch
+git reset origin/master
+git co -t origin/master
