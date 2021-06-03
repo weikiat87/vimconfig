@@ -81,46 +81,56 @@ endif
 
 colorscheme afterglow
 
-
 let mapleader=" "
+
 " nerdtree conf
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " KEY BINDING
-" Buffer Jumping
+" Windows List
+map <leader>w :Windows<CR>
+" Windows Jumping
 nnoremap <silent><leader>h :wincmd h<CR>
 nnoremap <silent><leader>j :wincmd j<CR>
 nnoremap <silent><leader>k :wincmd k<CR>
 nnoremap <silent><leader>l :wincmd l<CR>
+" Windows ONLY
+nnoremap <silent><leader>o :wincmd o<CR>
+" Windows Moving
+nnoremap <silent><leader>H :wincmd H<CR>
+nnoremap <silent><leader>J :wincmd J<CR>
+nnoremap <silent><leader>K :wincmd K<CR>
+nnoremap <silent><leader>L :wincmd L<CR>
+
 
 "Buffer Keybinds
-map <nowait><leader>b :Buffers<CR>
-map <nowait><leader>w :Windows<CR>
-map <leader>bl :ls<CR>
-map <leader>bn :bnext<CR>
-map <leader>bp :bprev<CR>
+map <leader>B :Buffers<CR>
+map <leader>b :ls<CR>
+map <leader>bl :bnext<CR>
+map <leader>bh :bprev<CR>
 
 " Resize Screen
-nnoremap <c-h> :vertical resize +2<CR>
-nnoremap <c-l> :vertical resize -2<CR>
-nnoremap <c-j> :resize +2<CR>
-nnoremap <c-k> :resize -2<CR>
+nnoremap <silent><c-h> :vertical resize +2<CR>
+nnoremap <silent><c-l> :vertical resize -2<CR>
+nnoremap <silent><c-j> :resize +2<CR>
+nnoremap <silent><c-k> :resize -2<CR>
 
 " better escape
 inoremap jk <ESC>
 inoremap kj <ESC>
 
-" Edit vimr configuration file
+" Edit vimrc configuration file
 nnoremap <Leader>ve :e $MYVIMRC<CR>
-" Reload vimr configuration file
+nnoremap <Leader>vs :vsplit $MYVIMRC<CR>
+" Reload vimrc configuration file
 nnoremap <Leader>vr :source $MYVIMRC<CR>
 
 nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <leader>f :NERDTreeToggle<CR>
 
 nnoremap <leader>p :Files<CR>
-nnoremap <C-g> :Rg<CR>
+nnoremap <c-g> :Rg<CR>
 nnoremap <leader>t :Tags<CR>
 nnoremap <leader>m :Marks<CR>
 
@@ -134,7 +144,7 @@ let g:undotree_WindowLayout = 2
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
-  \ 'ctrl-k': 'split',
+  \ 'ctrl-j': 'split',
   \ 'ctrl-l': 'vsplit'
   \}
 
@@ -260,9 +270,14 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Formatting
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+"
 " Formatting selected code.
 xmap <leader>ff  <Plug>(coc-format-selected)
 nmap <leader>ff  <Plug>(coc-format-selected)
+
+" Format all
+xmap <leader>fa  <Plug>(coc-format)
+nmap <leader>fa  <Plug>(coc-format)
 
 augroup mygroup
   autocmd!
@@ -313,19 +328,20 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
+" B
 " Show all diagnostics
-nnoremap <silent> <leader>cd :<C-u>CocList diagnostics<cr>
+nnoremap <leader>cd :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent> <leader>ce :<C-u>CocList extensions<cr>
+nnoremap <leader>ce :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <leader>cc :<C-u>CocList commands<cr>
+nnoremap <nowait> <leader>cc :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
+nnoremap <nowait> <leader>co  :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent><nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
+nnoremap <nowait> <leader>cs  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <leader>cj  :<C-u>CocNext<CR>
+nnoremap <leader>cj  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <leader>ck  :<C-u>CocPrev<CR>
+nnoremap <leader>ck  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent> <leader>cl  :<C-u>CocListResume<CR>
+nnoremap <leader>cl  :<C-u>CocListResume<CR>
